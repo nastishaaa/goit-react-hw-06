@@ -9,9 +9,20 @@ const slice = createSlice({
             { id: 3, name: "Andrew Smith", phone: "+1122334455" },
             { id: 4, name: "Olivia Johnson", phone: "+5566778899" },
             { id: 5, name: "James Brown", phone: "+6677889900" }
-        ]
+        ],
     },
-    reducers: {},
+    reducers: {
+        addContact: (state, action) => {
+            state.items.push(action.payload);
+        }, 
+        deleteContact: (state, action) => {
+            state.items = state.items.filter(item => 
+                item.id !== action.payload
+            )
+        },
+        
+    },
 });
 
+export const {addContact, deleteContact} = slice.actions;
 export default slice.reducer;

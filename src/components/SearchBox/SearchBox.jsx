@@ -1,19 +1,25 @@
-export default function SearchBox() {
+import c from './SearchBox.module.css'
+import { useId } from "react";
+import { useDispatch } from 'react-redux';
+import { setFilter } from '../../redux/filtersSlice';
 
-    const handleSubmit = (ev) => {
-        ev.preventDefault()
+export default function SearchBox() {
+    const searchId = useId();
+    const dispatch = useDispatch();
+    
+    const handleFilter = (e) => {
+        dispatch(setFilter(e.target.value));
     }
-    return(
-        <>
-            <form onSubmit={handleSubmit}>
-                <input type="text"
-                placeholder="Contact..."
-                required />
-                <input type="tel" 
-                placeholder="Phone number..."
-                required />
-                <button type="submit">Add contact</button>
-            </form>
-        </>
-    )
+    
+    return (
+        <div className={c.div}>
+            <label>Find contacts by name</label>
+            <input className={c.input}
+                id={searchId}
+                type="text"
+                name="search"
+                onChange={handleFilter}
+            />
+        </div>
+    );
 }
